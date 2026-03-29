@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Liquidar Pago - Autos Colombia</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f4; margin: 0;}
+        .ticket-box { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.2); width: 400px; }
+        .resumen { background: #f9f9f9; padding: 15px; border: 1px dashed #ccc; margin-bottom: 20px; }
+        .resumen p { margin: 5px 0; }
+        .total { font-size: 24px; color: #28A745; font-weight: bold; text-align: center; margin: 20px 0; }
+        select, button { width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; font-size: 16px; border-radius: 4px; border: 1px solid #ccc;}
+        .btn-confirm { background: #28A745; color: white; border: none; cursor: pointer; font-weight: bold; }
+        .btn-cancel { background: #6c757d; color: white; text-decoration: none; display: block; text-align: center; padding: 10px; border-radius: 4px; margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <div class="ticket-box">
+        <h2 style="text-align: center;">Liquidación de Salida</h2>
+        
+        <div class="resumen">
+            <p><strong>Placa:</strong> {{ registro['placa_vehiculo'] }} ({{ registro['tipo'] }})</p>
+            <p><strong>Celda a liberar:</strong> {{ registro['celda_nombre'] }}</p>
+            <hr>
+            <p><strong>Hora Entrada:</strong> {{ registro['hora_entrada'] }}</p>
+            <p><strong>Hora Salida:</strong> {{ hora_salida }}</p>
+            <p><strong>Tiempo Total:</strong> {{ minutos }} minutos</p>
+        </div>
+
+        <div class="total">
+            Total a Pagar: ${{ total }} COP
+        </div>
+
+        <form method="POST">
+            <label for="metodo_pago"><strong>Método de Pago:</strong></label>
+            <select name="metodo_pago" required>
+                <option value="Efectivo">Efectivo</option>
+                <option value="Tarjeta">Tarjeta (Débito/Crédito)</option>
+                <option value="Transferencia">Transferencia (Nequi/Daviplata)</option>
+            </select>
+            
+            <button type="submit" class="btn-confirm">Confirmar Pago y Liberar Celda</button>
+            <a href="/" class="btn-cancel">Cancelar / Volver</a>
+        </form>
+    </div>
+</body>
+</html>
